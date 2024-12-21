@@ -1,0 +1,424 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming Courses</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://wallpapercave.com/wp/wp3863452.jpg'); /* Christmas Background Image */
+      background-size: cover;
+      background-position: center;
+      color: #333;
+    }
+
+    header {
+      background-color: #306090;
+      color: white;
+      padding: 20px 40px; /* Padding to ensure space on both sides */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    header .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    /* Navigation */
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end; /* Move navigation items to the right */
+      padding-left: 50px; /* Ensure space from the left edge */
+      margin-right: 20px; /* Slight margin on the right to keep tabs within boundary */
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      padding: 5px 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      padding: 5px 15px;
+      transition: background-color 0.3s;
+    }
+
+    nav ul li a:hover {
+      background-color: #3498db;
+      border-radius: 5px;
+    }
+
+    /* Adjust the "About" tab specifically to move it slightly to the left */
+    nav ul li:nth-child(4) a {
+      margin-right: 12px; /* Move the "About" tab 5px to the left */
+    }
+
+    .hero-section {
+      background-color: rgba(41, 128, 185, 0.7); /* Semi-transparent to allow text visibility */
+      color: white;
+      text-align: center;
+      padding: 100px 20px 50px; /* Add padding for spacing */
+      margin-top: 60px; /* Ensure content is not hidden behind fixed header */
+    }
+
+    .cta-button {
+      background-color: #e74c3c;
+      color: white;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .cta-button:hover {
+      background-color: #c0392b;
+    }
+
+    .language-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .lang-tab {
+      background-color: #2980b9;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .lang-tab:hover {
+      background-color: #3498db;
+    }
+
+    .courses-section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .courses-section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .course-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .course {
+        display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8; /* Lighter, brighter background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 30px;
+    }
+
+    .course img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .course h3 {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+
+    .course p {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #7f8c8d;
+    }
+
+    .buy-button {
+      background-color: #27ae60;
+      color: white;
+      padding: 12px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;  /* Make button full width */
+      border-radius: 0 0 10px 10px;
+    }
+
+    .buy-button:hover {
+      background-color: #2ecc71;
+    }
+
+    /* Push button to the bottom of the course card */
+    .course .buy-button {
+      margin-top: auto;  /* Push the button to the bottom of the card */
+    }
+
+    .contact-section {
+      background-color: #ecf0f1;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background-color: #2980b9;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    form button:hover {
+      background-color: #3498db;
+    }
+
+    footer {
+      background-color: #386f9a;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* Modal Form (Hidden by default) */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(8, 8, 8);
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      width: 400px;
+      position: relative;
+      text-align: center;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal input,
+    .modal button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .modal button {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    .modal button:hover {
+      background-color: #3498db;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="https://cteezy.com/system/resources/previews/020/111/555.5eb78.png" alt="Logo" class="logo">
+      <h1>CodeMaster Academy</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-content">
+        <h2>Learn Programming with Expert-Led Courses</h2>
+        <p>Start your journey in coding today! Choose from a variety of programming languages and get started.</p>
+        <a href="#courses" class="cta-button">Browse Courses</a>
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses-section">
+      <h2>Our Courses</h2>
+
+      <!-- Language Selection Tabs -->
+      <div class="language-tabs">
+        <button class="lang-tab" onclick="changeLanguage('en')">English</button>
+        <button class="lang-tab" onclick="changeLanguage('es')">Spanish</button>
+        <button class="lang-tab" onclick="changeLanguage('fr')">French</button>
+      </div>
+
+      <!-- Course Containers -->
+      <div class="course-container">
+        <div class="course">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/9d2e8896750899.5eb54f3381452.png" alt="Python Course" class="course-image">
+          <h3 class="course-title" data-en="Python for Beginners" data-es="Python para Principiantes" data-fr="Python pour Débutants">Python for Beginners</h3>
+          <p class="course-desc" data-en="Learn the fundamentals of Python, the most versatile language." data-es="Aprende los fundamentos de Python, el lenguaje más versátil." data-fr="Apprenez les bases de Python, le langage le plus polyvalent.">Learn the fundamentals of Python, the most versatile language.</p>
+          <button class="buy-button" data-course="Python" onclick="openBuyForm('Python')">Buy Course</button>
+        </div>
+        <div class="course">
+          <img src="https://ih1.redbubble.net/image.917810873.9738/fposter,small,wall_texture,product,750x1000.jpg" alt="JavaScript Course" class="course-image">
+          <h3 class="course-title" data-en="JavaScript Mastery" data-es="Maestría en JavaScript" data-fr="Maîtrise de JavaScript">JavaScript Mastery</h3>
+          <p class="course-desc" data-en="Become a JavaScript pro and start building interactive websites." data-es="Conviértete en un profesional de JavaScript y comienza a crear sitios web interactivos." data-fr="Devenez un expert en JavaScript et commencez à créer des sites web interactifs.">Become a JavaScript pro and start building interactive websites.</p>
+          <button class="buy-button" data-course="JavaScript" onclick="openBuyForm('JavaScript')">Buy Course</button>
+        </div>
+        <div class="course">
+          <img src="https://static.vecteezy.com/system/resources/previews/020/111/555/non_2x/java-editorial-logo-free-download-free-vector.jpg" alt="Java Course" class="course-image">
+          <h3 class="course-title" data-en="Java Programming" data-es="Programación en Java" data-fr="Programmation en Java">Java Programming</h3>
+          <p class="course-desc" data-en="Master Java, one of the most widely used programming languages in enterprise development." data-es="Domina Java, uno de los lenguajes de programación más utilizados en el desarrollo empresarial." data-fr="Maîtrisez Java, l'un des langages de programmation les plus utilisés dans le développement d'entreprises.">Master Java, one of the most widely used programming languages in enterprise development.</p>
+          <button class="buy-button" data-course="Java" onclick="openBuyForm('Java')">Buy Course</button>
+        </div>
+        <div class="course">
+          <img src="https://reviewsreporter.com/wp-content/uploads/2022/08/CPlusPlus1-1.jpg" alt="C++ Course" class="course-image">
+          <h3 class="course-title" data-en="C++ Programming" data-es="Programación en C++" data-fr="Programmation en C++">C++ Programming</h3>
+          <p class="course-desc" data-en="Learn C++ and dive into system and application software development." data-es="Aprende C++ y adéntrate en el desarrollo de software de sistemas y aplicaciones." data-fr="Apprenez C++ et plongez dans le développement de logiciels système et d'applications.">Learn C++ and dive into system and application software development.</p>
+          <button class="buy-button" data-course="C++" onclick="openBuyForm('C++')">Buy Course</button>
+        </div>
+        <div class="course">
+          <img src="https://e7.pngegg.com/pngimages/963/964/png-clipart-ruby-on-rails-web-framework-software-framework-angularjs-ruby-programming-language-logo-web-application.png" alt="Ruby Course" class="course-image">
+          <h3 class="course-title" data-en="Ruby on Rails" data-es="Ruby on Rails" data-fr="Ruby on Rails">Ruby on Rails</h3>
+          <p class="course-desc" data-en="Learn Ruby on Rails, the powerful web framework for building applications." data-es="Aprende Ruby on Rails, el poderoso marco web para construir aplicaciones." data-fr="Apprenez Ruby on Rails, le puissant cadre web pour créer des applications.">Learn Ruby on Rails, the powerful web framework for building applications.</p>
+          <button class="buy-button" data-course="Ruby" onclick="openBuyForm('Ruby')">Buy Course</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CodeMaster Academy. All rights reserved.</p>
+  </footer>
+
+  <!-- Modal Form (Hidden by default) -->
+  <div id="buy-course-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2>Buy Course</h2>
+      <form id="buy-course-form">
+        <input type="text" id="user-name" placeholder="Your Name" required>
+        <input type="email" id="user-email" placeholder="Your Email" required>
+        <input type="text" id="course-name" placeholder="Course Name" readonly required>
+        <input type="number" id="payment" placeholder="Payment Amount" required>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Show modal when Buy Course button is clicked
+    function openBuyForm(courseName) {
+      document.getElementById('course-name').value = courseName;
+      document.getElementById('buy-course-modal').style.display = 'flex';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('buy-course-modal').style.display = 'none';
+    }
+
+    // Language switching functionality
+    function changeLanguage(language) {
+      const titles = document.querySelectorAll('.course-title');
+      const descriptions = document.querySelectorAll('.course-desc');
+
+      titles.forEach(title => {
+        title.textContent = title.getAttribute('data-' + language);
+      });
+
+      descriptions.forEach(desc => {
+        desc.textContent = desc.getAttribute('data-' + language);
+      });
+    }
+  </script>
+</body>
+</html>
